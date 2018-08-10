@@ -1,14 +1,23 @@
 <?php
-	echo "Uso de memoria no inicio:".memory_get_usage()." bytes\n";
-	/* Ex: Uso de memoria no inicio: 361400 bytes */
-	// Vamos fazer um loop para consumir memoria
-	for($i=0; $i<50000; $i++) {
-		$array[]=md5($i);
-	}
-	echo "Uso de memoria depois do loop:".memory_get_usage()." bytes\n";
-	// Agora vamos reduzir alguns arrays com unset
-	for($i=0; $i<10000; $i++){
-		unset ($array[$i]);
-	}
-	echo "Uso de memoria no final:".memory_get_usage()." bytes\n";
-	echo "O Pico de memoria:".memory_get_peak_usage()." bytes\n";
+    /*
+    *   memory_get_usage()          = Retorna a quantidade de memória, em bytes, que esta atualmente alocada para o seu script PHP.
+        memory_get_peak_usage()     = Retorna o pico de memória, em bytes, que foi alocado para seu script PHP.
+        unset                       = Destrói a variável especificada.
+
+    /                                       */
+    ////////////// VALOR DA MEMORIA NO PRIMEIRO MOMENTO //////////////
+	echo 'Uso de memória antes de qualquer regra de negocio:'.memory_get_usage().' bytes<br>';
+    
+    ////////////// LOOP PARA CONSUMIR MEMORIA //////////////
+    for($contador=0; $contador<50000; $contador++) {
+        $array[]=md5($contador);
+    }
+    echo 'O valor do uso da memório após a "regra de negocio":'.memory_get_usage()." bytes<br>";
+    
+    ////////////// USANDO BOAS PRATICAS PARA REDUZIR OCUSTO DA MEMORIA  //////////////
+	for($contador=0; $contador<10000; $contador++){
+		unset ($array[$contador]);
+    }
+    
+	echo 'O uso de memória ao terminar a aplicação:'.memory_get_usage().' bytes<br>';
+	echo 'O auge do uso de memória durante a aplicação:'.memory_get_peak_usage().' bytes<br>';
